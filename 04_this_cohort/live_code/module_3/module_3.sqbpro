@@ -1,17 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?><sqlb_project><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="12168"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><table title="booth" custom_title="0" dock_id="4" table="4,5:mainbooth"/><dock_state state="000000ff00000000fd000000010000000200000536000003a5fc0100000003fb000000160064006f0063006b00420072006f00770073006500310100000000ffffffff0000000000000000fb000000160064006f0063006b00420072006f00770073006500320100000000000005360000000000000000fb000000160064006f0063006b00420072006f00770073006500340100000000ffffffff0000012300ffffff000005360000000000000004000000040000000800000008fc00000000"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="booth" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="136"/><column index="2" value="164"/><column index="3" value="300"/><column index="4" value="108"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="COUNT">/* MODULE 3 */
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="/home/myos/Desktop/DSI/sql/05_src/sql/farmersmarket.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="9604"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,5:mainbooth"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="booth" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="111"/><column index="2" value="132"/><column index="3" value="300"/><column index="4" value="86"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="COUNT.sql">/* MODULE 3 */
 /* COUNT */
 
 
 /* 1. Count the number of products */
- 
+SELECT COUNT(product_id) AS num_of_products
+FROM product;
 
  
 /* 2. How many products per product_qty_type */
-
+SELECT product_qty_type, COUNT(product_id) AS num_of_products
+FROM product
+GROUP BY product_qty_type
 
 
 /* 3. How many products per product_qty_type and per their product_size */
-
+SELECT product_size, product_qty_type,
+       COUNT(product_id) AS num_of_products
+FROM product
+GROUP BY product_size, product_qty_type
 
 
 /* COUNT DISTINCT 
@@ -19,19 +25,74 @@
 
 
 --------------------------------------------------------------------------------------------------------------------------------------------
-</sql><sql name="SUM_AVG">/* MODULE 3 */
-/* SUM &amp; AVG */
+</sql><sql name="arithmitic.sql">/* MODULE 3 */
+/* Arithmitic */
 
 
-/* 1. How much did customers spend each day */
+/* 1. power, pi(), ceiling, division, integer division, etc */
+SELECT 
 
- 
 
-/* 2. How much does each customer spend on average */
+/* 2. Every even vendor_id with modulo */
+
+
+
+/* 3. What about every third?  */
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+</sql><sql name="CTE.sql">/* MODULE 3 */
+/* Common Table Expression (CTE) */
+
+
+/* 1. Calculate sales per vendor per day */
+SELECT 
+
+
+
+
+
+/* ... re-aggregate the daily sales for each WEEK instead now  */
+
 
 
 --------------------------------------------------------------------------------------------------------------------------------------------
-</sql><sql name="MIN_MAX">/* MODULE 3 */
+</sql><sql name="dates.sql">/* MODULE 3 */
+/* Date functions */
+
+
+/* 1. now */
+SELECT 
+
+
+/* 2. strftime */
+
+
+
+/* 3. adding dates, e.g. last date of the month */
+
+
+
+/* 4. difference between dates, 
+ a. number of days between now and each market_date
+ b. number of YEARS between now and market_date
+ c. number of HOURS bewtween now and market_date
+ */
+</sql><sql name="HAVING.sql">/* MODULE 3 */
+/* HAVING */
+
+
+/* 1. How much did a customer spend on each day?
+Filter to customer_id between 1 and 5 and total_cost &gt; 50 
+... What order of execution occurs?*/
+ 
+
+
+/* 2. How many products were bought?
+Filter to number of purchases between 300 and 500  */
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+</sql><sql name="MIN_MAX.sql">/* MODULE 3 */
 /* MIN &amp; MAX */
 
 
@@ -57,37 +118,7 @@
 
 
 --------------------------------------------------------------------------------------------------------------------------------------------
-</sql><sql name="arithmitic">/* MODULE 3 */
-/* Arithmitic */
-
-
-/* 1. power, pi(), ceiling, division, integer division, etc */
-SELECT 
-
-
-/* 2. Every even vendor_id with modulo */
-
-
-
-/* 3. What about every third?  */
-
---------------------------------------------------------------------------------------------------------------------------------------------
-</sql><sql name="HAVING">/* MODULE 3 */
-/* HAVING */
-
-
-/* 1. How much did a customer spend on each day?
-Filter to customer_id between 1 and 5 and total_cost &gt; 50 
-... What order of execution occurs?*/
- 
-
-
-/* 2. How many products were bought?
-Filter to number of purchases between 300 and 500  */
-
-
---------------------------------------------------------------------------------------------------------------------------------------------
-</sql><sql name="subquery_joins">/* MODULE 3 */
+</sql><sql name="subquery_joins.sql">/* MODULE 3 */
 /* Subquery FROM */
 
 
@@ -101,7 +132,7 @@ Filter to number of purchases between 300 and 500  */
 
 
 --------------------------------------------------------------------------------------------------------------------------------------------
-</sql><sql name="subquery_where">/* MODULE 3 */
+</sql><sql name="subquery_where.sql">/* MODULE 3 */
 /* Subquery WHERE */
 
 
@@ -114,7 +145,19 @@ Filter to number of purchases between 300 and 500  */
 
 
 --------------------------------------------------------------------------------------------------------------------------------------------
-</sql><sql name="temp_table">/* MODULE 3 */
+</sql><sql name="SUM_AVG.sql">/* MODULE 3 */
+/* SUM &amp; AVG */
+
+
+/* 1. How much did customers spend each day */
+
+ 
+
+/* 2. How much does each customer spend on average */
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+</sql><sql name="temp_table.sql">/* MODULE 3 */
 /* Temp Tables */
 
 
@@ -140,41 +183,180 @@ CREATE TABLE temp.new_vendor_inventory AS
 
 
 --------------------------------------------------------------------------------------------------------------------------------------------
-</sql><sql name="CTE">/* MODULE 3 */
-/* Common Table Expression (CTE) */
+</sql><sql name="assignment1.sql"> /* ASSIGNMENT 1 */
+--Please write responses between the QUERY # and END QUERY blocks
+/* SECTION 2 */
 
 
-/* 1. Calculate sales per vendor per day */
-SELECT 
-
-
-
-
-
-/* ... re-aggregate the daily sales for each WEEK instead now  */
+--SELECT
+/* 1. Write a query that returns everything in the customer table. */
+--QUERY 1
+SELECT * FROM customer;
 
 
 
---------------------------------------------------------------------------------------------------------------------------------------------
-</sql><sql name="dates">/* MODULE 3 */
-/* Date functions */
+--END QUERY
 
 
-/* 1. now */
-SELECT 
+/* 2. Write a query that displays all of the columns and 10 rows from the customer table, 
+sorted by customer_last_name, then customer_first_ name. */
+--QUERY 2
+SELECT * FROM customer
+ORDER BY customer_last_name, customer_first_name
+LIMIT 10;
 
 
-/* 2. strftime */
+--END QUERY
+
+
+--WHERE
+/* 1. Write a query that returns all customer purchases of product IDs 4 and 9. 
+Limit to 25 rows of output. */
+--QUERY 3
+SELECT * FROM customer_purchases
+WHERE product_id IN (4, 9)
+LIMIT 25;
 
 
 
-/* 3. adding dates, e.g. last date of the month */
+--END QUERY
 
 
 
-/* 4. difference between dates, 
- a. number of days between now and each market_date
- b. number of YEARS between now and market_date
- c. number of HOURS bewtween now and market_date
- */
+/*2. Write a query that returns all customer purchases and a new calculated column 'price' (quantity * cost_to_customer_per_qty), 
+filtered by customer IDs between 8 and 10 (inclusive) using either:
+	1.  two conditions using AND
+	2.  one condition using BETWEEN
+Limit to 25 rows of output.
+*/
+--QUERY 4
+SELECT *, quantity * cost_to_customer_per_qty AS price
+FROM customer_purchases
+WHERE customer_id BETWEEN 8 AND 10
+LIMIT 25;
+
+
+--END QUERY
+
+
+--CASE
+/* 1. Products can be sold by the individual unit or by bulk measures like lbs. or oz. 
+Using the product table, write a query that outputs the product_id and product_name
+columns and add a column called prod_qty_type_condensed that displays the word “unit” 
+if the product_qty_type is “unit,” and otherwise displays the word “bulk.” */
+--QUERY 5
+SELECT product_id, product_name
+,CASE WHEN product_qty_type = 'unit' THEN 'unit'
+	ELSE 'bulk'
+	END AS produ_qty_type_condensed
+
+FROM product;
+--END QUERY
+
+
+/* 2. We want to flag all of the different types of pepper products that are sold at the market. 
+add a column to the previous query called pepper_flag that outputs a 1 if the product_name 
+contains the word “pepper” (regardless of capitalization), and otherwise outputs 0. */
+--QUERY 6
+SELECT product_id, product_name
+,CASE WHEN product_name LIKE '%pepper%' THEN 1
+	ELSE 0
+	END AS pepper_flag
+
+FROM product;
+
+
+
+--END QUERY
+
+
+--JOIN
+/* 1. Write a query that INNER JOINs the vendor table to the vendor_booth_assignments table on the 
+vendor_id field they both have in common, and sorts the result by market_date, then vendor_name.
+Limit to 24 rows of output. */
+--QUERY 7
+SELECT *
+FROM vendor
+INNER JOIN vendor_booth_assignments
+	ON vendor.vendor_id = vendor_booth_assignments.vendor_id
+ORDER BY market_date, vendor_name
+LIMIT 24
+
+
+
+--END QUERY
+
+
+
+/* SECTION 3 */
+
+-- AGGREGATE
+/* 1. Write a query that determines how many times each vendor has rented a booth 
+at the farmer’s market by counting the vendor booth assignments per vendor_id. */
+--QUERY 8
+
+
+
+
+--END QUERY
+
+
+/* 2. The Farmer’s Market Customer Appreciation Committee wants to give a bumper 
+sticker to everyone who has ever spent more than $2000 at the market. Write a query that generates a list 
+of customers for them to give stickers to, sorted by last name, then first name. 
+
+HINT: This query requires you to join two tables, use an aggregate function, and use the HAVING keyword. */
+--QUERY 9
+
+
+
+
+--END QUERY
+
+
+--Temp Table
+/* 1. Insert the original vendor table into a temp.new_vendor and then add a 10th vendor: 
+Thomass Superfood Store, a Fresh Focused store, owned by Thomas Rosenthal
+
+HINT: This is two total queries -- first create the table from the original, then insert the new 10th vendor. 
+When inserting the new vendor, you need to appropriately align the columns to be inserted 
+(there are five columns to be inserted, I've given you the details, but not the syntax) 
+
+-&gt; To insert the new row use VALUES, specifying the value you want for each column:
+VALUES(col1,col2,col3,col4,col5) 
+*/
+--QUERY 10
+
+
+
+
+--END QUERY
+
+
+-- Date
+/*1. Get the customer_id, month, and year (in separate columns) of every purchase in the customer_purchases table.
+
+HINT: you might need to search for strfrtime modifers sqlite on the web to know what the modifers for month 
+and year are! 
+Limit to 25 rows of output. */
+--QUERY 11
+
+
+
+
+--END QUERY
+
+
+/* 2. Using the previous query as a base, determine how much money each customer spent in April 2022. 
+Remember that money spent is quantity*cost_to_customer_per_qty. 
+
+HINTS: you will need to AGGREGATE, GROUP BY, and filter...
+but remember, STRFTIME returns a STRING for your WHERE statement...
+AND be sure you remove the LIMIT from the previous query before aggregating!! */
+--QUERY 12
+
+
+
+
+--END QUERY
 </sql><current_tab id="0"/></tab_sql></sqlb_project>
