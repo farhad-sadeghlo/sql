@@ -25,7 +25,7 @@ All the other rows will remain the same. */
 SELECT *
 ,product_name || ', ' ||
  coalesce(product_size, '') || ' (' ||
- coalesce(product_qty_type, 'unit') || ')'  -- I didn't know what to do with the third column, so I chose 'missing'
+ coalesce(product_qty_type, 'unit') || ')'
 AS product_name_size_qty_type
 FROM product;
 
